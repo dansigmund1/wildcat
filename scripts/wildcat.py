@@ -2,6 +2,8 @@ import librosa as lb
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
+import io
+import base64
 from pydub import AudioSegment
 
 class WildCat:
@@ -20,20 +22,35 @@ class WildCat:
             audio = AudioSegment.from_file(self.audio_file, format="m4a")
             audio.export(f"{self.audio_file.replace('.m4a','.wav')}", format="wav")
             self.audio_file = f"{self.audio_file}.wav"
+
+    def convert_figure(self, fig):
+        buf = io.BytesIO()
+        fig.savefig(buf, format="png", bbox_inches="tight")
+        buf.seek(0)
+        img_base64 = base64.b64encode(buf.read()).decode("utf-8")
+        buf.close()
+        return img_base64
         
     def display_waveform(self, audio):
-        plt.plot(audio)
-        plt.title("Waveform")
-        plt.show()
+        fig, ax = plt.subplots()
+        ax.plot(audio)
+        ax.set_title("Waveform")
+        return fig
 
     def display_spectogram(self, audio, sr):
         X = lb.stft(audio)
         Xdb = lb.amplitude_to_db(abs(X))
-        plt.figure(figsize=(12,4))
-        lb.display.specshow(Xdb, sr=sr, x_axis="time", y_axis="hz")
-        plt.colorbar()
-        plt.title("Spectrogram")
-        plt.show()
+        fig, ax = plt.subplots(figsize=(12,4))
+        img = lb.display.specshow(
+            Xdb,
+            sr=sr,
+            x_axis="time",
+            y_axis="hz",
+            ax=ax
+        )
+        fig.colorbar(img, ax=ax)
+        ax.set_title("Spectrogram")
+        return fig
 
     def detect_beats(self, audio, sr):
         tempo, beat_frames = lb.beat.beat_track(y=audio, sr=sr)
@@ -63,14 +80,25 @@ class WildCat:
         plt.title("Mel Spectrogram")
         plt.show()
 
+    def display_dashboard(self):
+        self.convert_file()
+        audio, sr = self.read_audio()
+        waveform = self.convert_figure(self.display_waveform(audio))
+        spectogram = self.convert_figure(self.display_spectogram(audio, sr))
+        retdict = {'waveform':waveform,
+                   'spectogram':spectogram}# ,
+                #    'beats':self.detect_beats(audio, sr),
+                #    'pitch':self.get_pitch(audio, sr),
+                #    'chromagram':self.display_chromagram(audio, sr),
+                #    'mel_spectogram':self.display_mel_spectogram(audio, sr)}
+        return retdict
+
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-af", "--audio_file", help="Audio File to Remix")
     args = parser.parse_args()
     wc = WildCat(args.audio_file)
-    wc.convert_file()
-    audio, sr = wc.read_audio()
-    wc.display_spectogram(audio, sr)
+    wc.display_dashboard()
 
 # For manipulation:
 # librosa.effects.time_stretch(audio, rate=1.25)  # speed up
