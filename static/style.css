@@ -7,3 +7,39 @@ body {
 h1 {
     color: #333;
 }
+
+.waveform {
+    width: 20vw;
+    max-width: 600px;
+    height: auto;
+    position: absolute;
+    top: 10vh;
+    left: 15vw;
+}
+
+.spectogram {
+    width: 20vw;
+    max-width: 600px;
+    height: auto;
+    position: absolute;
+    top: 10vh;
+    left: 40vw;
+}
+
+.mel_spectogram { 
+    width: 20vw;
+    max-width: 600px;
+    height: auto;
+    position: absolute;
+    top: 30vh;
+    left: 15vw;
+}
+
+.chromagram { 
+    width: 20vw;
+    max-width: 600px;
+    height: auto;
+    position: absolute;
+    top: 30vh;
+    left: 40vw;
+}

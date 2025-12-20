@@ -21,11 +21,15 @@ def dashboard():
     wc = WildCat(filepath)
     wc.convert_file()
     audio, sr = wc.read_audio()
-    waveform = wc.display_waveform(audio)
-    spectogram = wc.display_spectogram(audio, sr)
+    waveform = wc.convert_figure(wc.display_waveform(audio))
+    spectogram = wc.convert_figure(wc.display_spectogram(audio, sr))
+    chromagram = wc.convert_figure(wc.display_chromagram(audio, sr))
+    mel_spectogram = wc.convert_figure(wc.display_mel_spectogram(audio, sr))
     return render_template("dashboard.html", 
                            waveform=waveform,
                            spectogram=spectogram,
+                           chromagram=chromagram,
+                           mel_spectogram=mel_spectogram,
                            filename=file.filename)
 
 if __name__=="__main__":
