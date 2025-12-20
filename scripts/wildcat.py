@@ -55,13 +55,15 @@ class WildCat:
     def detect_beats(self, audio, sr):
         tempo, beat_frames = lb.beat.beat_track(y=audio, sr=sr)
         beat_times = lb.frames_to_time(beat_frames, sr=sr)
-        print(f"Tempo: {tempo}")
-        print(f"Beat Times: {beat_times}")
+        # print(f"Tempo: {tempo}")
+        # print(f"Beat Times: {beat_times}")
+        return tempo, beat_times
 
     def get_pitch(self, audio, sr):
         pitch, mag = lb.piptrack(y=audio, sr=sr)
         pitches = pitch[pitch > 0]
-        print(f"Estimated pitch values: {pitches[:20]}")
+        # print(f"Estimated pitch values: {pitches[:20]}")
+        return pitches[:20]
 
     def display_chromagram(self, audio, sr):
         chroma = lb.feature.chroma_stft(y=audio, sr=sr)
