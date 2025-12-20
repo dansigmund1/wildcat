@@ -15,12 +15,21 @@ h1 {
     text-align: center;
 }
 
-.spectrogram {
+.chromagram { 
     width: 45%;
     height: 50vh;
     margin: 0 auto;
     text-align: center;
     top: 10vh;
+    left: 40vw;
+}
+
+.spectrogram {
+    width: 45%;
+    height: 50vh;
+    margin: 0 auto;
+    text-align: center;
+    top: 30vh;
     left: 40vw;
 }
 
@@ -31,13 +40,4 @@ h1 {
     text-align: center;
     top: 30vh;
     left: 15vw;
-}
-
-.chromagram { 
-    width: 45%;
-    height: 50vh;
-    margin: 0 auto;
-    text-align: center;
-    top: 30vh;
-    left: 40vw;
 }
