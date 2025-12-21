@@ -11,33 +11,37 @@ h1 {
 .waveform {
     width: 45%;
     height: 50vh;
-    margin: 0 auto;
-    text-align: center;
+}
+
+.waveform > div {
+    width: 100% !important
 }
 
 .chromagram { 
-    width: 45%;
-    height: 50vh;
-    margin: 0 auto;
-    text-align: center;
-    top: 10vh;
-    left: 40vw;
+    position: relative;
+    left: 600px;
+    margin-top: -333px;
+}
+
+.chromagram > div {
+    width: 45% !important
 }
 
 .spectrogram {
-    width: 45%;
-    height: 50vh;
-    margin: 0 auto;
-    text-align: center;
-    top: 30vh;
-    left: 40vw;
+    position: relative;
+    margin-top: 10px;
+}
+
+.spectrogram > div {
+    width: 45% !important
 }
 
 .mel_spectrogram { 
-    width: 45%;
-    height: 50vh;
-    margin: 0 auto;
-    text-align: center;
-    top: 30vh;
-    left: 15vw;
+    position: relative;
+    left: 600px;
+    margin-top: -450px;
+}
+
+.mel_spectrogram > div {
+    width: 45% !important
 }

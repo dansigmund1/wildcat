@@ -29,7 +29,7 @@ class WildCat:
             mode="lines",
             hovertemplate="Time: %{x:.2f}s<br>Amplitude: %{y:.3f}"
         ))
-        fig.update_layout(title="Waveform", xaxis_title="Time (s)", yaxis_title="Amplitude")
+        fig.update_layout(title="Waveform", xaxis_title="Time (s)", yaxis_title="Amplitude", autosize=True)
         return fig
 
     def display_spectrogram(self, audio, sr):
@@ -49,7 +49,8 @@ class WildCat:
             title="Spectrogram",
             xaxis_title="Time (s)",
             yaxis_title="Frequency (Hz)",
-            yaxis=dict(autorange='reversed')
+            yaxis=dict(autorange='reversed'),
+            autosize=True
         )
         return fig
 
@@ -79,7 +80,8 @@ class WildCat:
             title="Chromagram",
             xaxis_title="Time (s)",
             yaxis_title="Chroma",
-            yaxis=dict(autorange='reversed')
+            yaxis=dict(autorange='reversed'),
+            autosize=True
         )
         return fig
 
@@ -100,7 +102,8 @@ class WildCat:
             title="Mel Spectrogram",
             xaxis_title="Time (s)",
             yaxis_title="Mel Frequency (Hz)",
-            yaxis=dict(autorange='reversed')
+            yaxis=dict(autorange='reversed'),
+            autosize=True
         )
         return fig
 
